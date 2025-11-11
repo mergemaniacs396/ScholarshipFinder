@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Mergemaniacs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1.2rem 0;
+        }
+        .navbar-brand { font-size: 1.8rem; font-weight: 800; color: white !important; }
+        .nav-link { color: rgba(255, 255, 255, 0.9) !important; font-weight: 600; margin: 0 15px; }
+        .nav-link.active { border-bottom: 3px solid white; }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 70px 0 50px;
+            margin-bottom: 40px;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; }
+        .mission-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .team-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .team-card:hover { transform: translateY(-10px); }
+        .team-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            color: white;
+        }
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .team-role {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #2d1b4e 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer h5 { font-size: 1.3rem; font-weight: 700; margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> Mergemaniacs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="find-scholarships.html">Find Scholarships</a></li>
+                    <li class="nav-item"><a class="nav-link" href="my-wishlist.html">My Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-users"></i> About Mergemaniacs</h1>
+            <p>Empowering Students to Achieve Global Excellence</p>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 40px 0;">
+        <div class="mission-card">
+            <h2 style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-bullseye"></i> Our Mission</h2>
+            <p>Mergemaniacs is dedicated to breaking financial barriers in education. We've created the world's most comprehensive scholarship discovery platform to help Indian students access funding from top institutions globally.</p>
+            <p style="margin-top: 15px;">With 200+ scholarships from 45+ countries and advanced AI matching algorithms, we make finding your perfect scholarship simple, transparent, and absolutely private.</p>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="mission-card" style="text-align: center;">
+                    <i class="fas fa-globe" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--primary);">International Focus</h4>
+                    <p>Special emphasis on fully-funded scholarships from USA, UK, Canada, Europe, Asia, and Australia</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="mission-card" style="text-align: center;">
+                    <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--primary);">100% Privacy</h4>
+                    <p>Your data stays on your device. Zero servers. Zero tracking. Complete confidentiality guaranteed</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="mission-card" style="text-align: center;">
+                    <i class="fas fa-brain" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--primary);">Smart Matching</h4>
+                    <p>AI-powered algorithm calculates your exact eligibility percentage instantly</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 50px; margin-top: 50px; color: var(--text-dark);">👨‍💼 Meet the Team</h2>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4 class="team-name">Mayun Bhrasadia</h4>
+                    <p class="team-role">Web Developer</p>
+                    <p style="color: var(--text-light);">Backend & Database Architecture</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4 class="team-name">Varnit Bisht</h4>
+                    <p class="team-role">Team Leader & Project Manager</p>
+                    <p style="color: var(--text-light);">Project Coordination & Strategy</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4 class="team-name">Vansh Agarwal</h4>
+                    <p class="team-role">Web Developer</p>
+                    <p style="color: var(--text-light);">Frontend Development & Integration</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4 class="team-name">Yuvraj Kukreja</h4>
+                    <p class="team-role">Website Designer</p>
+                    <p style="color: var(--text-light);">UI/UX Design & User Experience</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-card mt-5" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; text-align: center;">
+            <h3 style="color: white; margin-bottom: 15px;">From Thapar Institute of Engineering and Technology</h3>
+            <p style="font-size: 1.1rem;">Building the future of education through innovation</p>
+            <p style="margin-top: 20px; opacity: 0.9;">
+                <i class="fas fa-envelope"></i> mergemaniacs396@gmail.com<br>
+                <i class="fas fa-phone"></i> +91 9675715931 | +91 8840891562
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-globe"></i> Mergemaniacs</h5>
+                    <p>Your trusted global scholarship platform.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="find-scholarships.html">Find Scholarships</a></li>
+                        <li><a href="my-wishlist.html">My Wishlist</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Our Team</h5>
+                    <ul class="footer-links">
+                        <li>Mayun Bhrasadia - Web Developer</li>
+                        <li>Varnit Bisht - Team Leader & PM</li>
+                        <li>Vansh Agarwal - Web Developer</li>
+                        <li>Yuvraj Kukreja - Website Designer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

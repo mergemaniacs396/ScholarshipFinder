@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Mergemaniacs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1.2rem 0;
+        }
+        .navbar-brand { font-size: 1.8rem; font-weight: 800; color: white !important; }
+        .nav-link { color: rgba(255, 255, 255, 0.9) !important; font-weight: 600; margin: 0 15px; }
+        .nav-link.active { border-bottom: 3px solid white; }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 70px 0 50px;
+            margin-bottom: 40px;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; }
+        .contact-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .contact-card h2 { color: var(--text-dark); margin-bottom: 30px; }
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+        }
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        .contact-info i {
+            width: 50px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        .privacy-box {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        .privacy-box h4 { color: white; margin-bottom: 15px; }
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #2d1b4e 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer h5 { font-size: 1.3rem; font-weight: 700; margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> Mergemaniacs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="find-scholarships.html">Find Scholarships</a></li>
+                    <li class="nav-item"><a class="nav-link" href="my-wishlist.html">My Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-envelope"></i> Get In Touch</h1>
+            <p>We'd love to hear from you - feedback, suggestions, partnerships</p>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 40px 0;">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="contact-card">
+                    <h2>Send us a Message</h2>
+                    <form onsubmit="handleSubmit(event)">
+                        <input type="text" class="form-control" placeholder="Your Full Name" required>
+                        <input type="email" class="form-control" placeholder="Your Email Address" required>
+                        <input type="text" class="form-control" placeholder="Subject" required>
+                        <textarea class="form-control" rows="6" placeholder="Your Message..." required style="resize: vertical;"></textarea>
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="contact-card">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            mergemaniacs396@gmail.com
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +91 9675715931<br>
+                            +91 8840891562
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Location</strong><br>
+                            Thapar Institute of Engineering<br>
+                            and Technology, Patiala, Punjab
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Response Time</strong><br>
+                            Within 24 hours
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-box">
+                    <h4>🔒 Privacy Guarantee</h4>
+                    <p>Your information is safe with us. We never share personal data. All communication is confidential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-globe"></i> Mergemaniacs</h5>
+                    <p>Your trusted global scholarship platform.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="find-scholarships.html">Find Scholarships</a></li>
+                        <li><a href="my-wishlist.html">My Wishlist</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Our Team</h5>
+                    <ul class="footer-links">
+                        <li>Mayun Bhrasadia - Web Developer</li>
+                        <li>Varnit Bisht - Team Leader & PM</li>
+                        <li>Vansh Agarwal - Web Developer</li>
+                        <li>Yuvraj Kukreja - Website Designer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will respond within 24 hours.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find 200+ scholarships from government, private, and international sources">
+    <title>Mergemaniacs - Global Scholarship Discovery Platform</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #059669;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --dark: #1e293b;
+            --dark-gradient: #2d1b4e;
+            --light: #f8fafc;
+            --light-lavender: #f0f4ff;
+            --soft-purple: #f5e6ff;
+            --soft-pink: #ffe6f0;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+            padding: 1.2rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 600;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: white !important;
+            border-bottom: 3px solid white;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: slideDown 0.8s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: slideUp 0.8s ease 0.2s backwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-buttons {
+            animation: slideUp 0.8s ease 0.4s backwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-hero {
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-hero-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-hero-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        /* STATS SECTION */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .stat-card:nth-child(1) {
+            background: linear-gradient(135deg, #e0f2fe, #bfdbfe);
+            border-left-color: #0284c7;
+        }
+
+        .stat-card:nth-child(2) {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left-color: #059669;
+        }
+
+        .stat-card:nth-child(3) {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left-color: #f59e0b;
+        }
+
+        .stat-card:nth-child(4) {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            border-left-color: #db2777;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* FEATURES SECTION */
+        .features-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .feature-card {
+            padding: 45px 35px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+            margin-bottom: 30px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* INTERNATIONAL HIGHLIGHT */
+        .international-highlight {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(5, 150, 105, 0.2);
+        }
+
+        .international-highlight h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .country-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .country-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .country-badge:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-gradient) 100%);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer h5 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            .section-title h2 { font-size: 2rem; }
+            .stat-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> Mergemaniacs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="find-scholarships.html">Find Scholarships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my-wishlist.html">My Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1><i class="fas fa-rocket"></i> Unlock Your Global Scholarship Journey</h1>
+            <p>Access 200+ scholarships from India's top institutions and world-class international universities</p>
+            <div class="hero-buttons">
+                <a href="find-scholarships.html" class="btn-hero btn-hero-primary">
+                    <i class="fas fa-search"></i> Discover Now
+                </a>
+                <a href="#features" class="btn-hero btn-hero-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <i class="fas fa-graduation-cap stat-icon"></i>
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Scholarships Listed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <i class="fas fa-globe stat-icon"></i>
+                        <div class="stat-number">45+</div>
+                        <div class="stat-label">Countries Covered</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign stat-icon"></i>
+                        <div class="stat-number">₹500Cr+</div>
+                        <div class="stat-label">Total Funding</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-icon"></i>
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Students Helped</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Mergemaniacs?</h2>
+                <p>The world's most comprehensive scholarship matching platform</p>
+            </div>
+            
+            <div class="international-highlight">
+                <i class="fas fa-star" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3>🌍 International Scholarships - Our Specialty</h3>
+                <p>We focus heavily on fully-funded international opportunities with exclusive application guides and country-specific tips</p>
+                <div class="country-badges">
+                    <span class="country-badge">🇺🇸 USA</span>
+                    <span class="country-badge">🇬🇧 UK</span>
+                    <span class="country-badge">🇨🇦 Canada</span>
+                    <span class="country-badge">🇩🇪 Germany</span>
+                    <span class="country-badge">🇯🇵 Japan</span>
+                    <span class="country-badge">🇦🇺 Australia</span>
+                    <span class="country-badge">🇳🇱 Netherlands</span>
+                    <span class="country-badge">🇫🇷 France</span>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>Smart AI Matching</h4>
+                        <p>Our intelligent algorithm calculates your exact eligibility percentage for each scholarship in real-time.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h4>100% Private & Secure</h4>
+                        <p>All your data stays on your device. Zero server storage. Zero tracking. Your privacy is our priority.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4>Real-Time Match Score</h4>
+                        <p>Visual progress bars show exactly how well you match each scholarship's eligibility criteria.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h4>Document Checklists</h4>
+                        <p>Personalized checklists with templates for every required document for each scholarship.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h4>Compare Side-by-Side</h4>
+                        <p>Compare up to 3 scholarships simultaneously to make the perfect decision.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile Optimized</h4>
+                        <p>Fully responsive design works seamlessly on all devices - desktop, tablet, and mobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Future?</h2>
+            <p>Start your journey to world-class education today - thousands of opportunities await you</p>
+            <a href="find-scholarships.html" class="btn-hero btn-hero-primary btn-lg">
+                <i class="fas fa-rocket"></i> Begin Your Search Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-globe"></i> Mergemaniacs</h5>
+                    <p>Your trusted global scholarship discovery platform connecting ambitious Indian students with life-changing educational opportunities worldwide.</p>
+                    <p class="mt-3">
+                        <strong><i class="fas fa-envelope"></i> mergemaniacs396@gmail.com</strong><br>
+                        <strong><i class="fas fa-phone"></i> +91 9675715931 | +91 8840891562</strong>
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="find-scholarships.html">Find Scholarships</a></li>
+                        <li><a href="my-wishlist.html">My Wishlist</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Our Team</h5>
+                    <ul class="footer-links">
+                        <li>Mayun Bhrasadia - Web Developer</li>
+                        <li>Varnit Bisht - Team Leader & Project Manager</li>
+                        <li>Vansh Agarwal - Web Developer</li>
+                        <li>Yuvraj Kukreja - Website Designer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mergemaniacs | Thapar Institute of Engineering and Technology, Patiala | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

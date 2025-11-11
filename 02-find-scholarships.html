@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Scholarships - Mergemaniacs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+            padding: 1.2rem 0;
+        }
+        .navbar-brand { font-size: 1.8rem; font-weight: 800; color: white !important; }
+        .nav-link { color: rgba(255, 255, 255, 0.9) !important; font-weight: 600; margin: 0 15px; }
+        .nav-link.active { border-bottom: 3px solid white; }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 70px 0 50px;
+            margin-bottom: 40px;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; }
+        .filter-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 20px;
+        }
+        .filter-section h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+        .form-label { font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+        .form-control, .form-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 11px 15px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        .btn-filter {
+            width: 100%;
+            padding: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+        .btn-reset {
+            background: white;
+            border: 2px solid var(--text-light);
+            color: var(--text-dark);
+        }
+        .btn-reset:hover {
+            background: #f0f4ff;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .results-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .results-count { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); }
+        .scholarship-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            padding: 28px;
+            margin-bottom: 25px;
+            transition: all 0.35s ease;
+            border-left: 5px solid var(--primary);
+        }
+        .scholarship-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        .scholarship-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        .badge-custom {
+            padding: 7px 14px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 12px;
+        }
+        .badge-government { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; }
+        .badge-private { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9f1239; }
+        .badge-international { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; }
+        .international-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .match-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        .match-bar {
+            background: #e2e8f0;
+            height: 35px;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .match-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: 18px;
+        }
+        .match-high { background: linear-gradient(90deg, #10b981, #059669); }
+        .match-medium { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .match-low { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+        .detail-item i {
+            width: 28px;
+            color: var(--primary);
+            margin-right: 12px;
+        }
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+        }
+        .btn-action {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-view {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-view:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        .btn-wishlist {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .btn-wishlist.added {
+            background: #059669;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+        .loading i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #2d1b4e 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer h5 { font-size: 1.3rem; font-weight: 700; margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        @media (max-width: 768px) {
+            .filter-section { position: relative; margin-bottom: 25px; }
+            .results-header { flex-direction: column; align-items: flex-start; }
+            .card-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> Mergemaniacs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="find-scholarships.html">Find Scholarships</a></li>
+                    <li class="nav-item"><a class="nav-link" href="my-wishlist.html">My Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-search"></i> Find Your Perfect Scholarship</h1>
+            <p>200+ Scholarships from India and 45+ Countries - Let Our AI Find Your Match</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="filter-section">
+                    <h4><i class="fas fa-filter"></i> Smart Filters</h4>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Education Level</label>
+                        <select class="form-select" id="educationLevel">
+                            <option value="">All Levels</option>
+                            <option value="School">12th Pass</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="UG">Bachelor's Degree</option>
+                            <option value="PG">Master's Degree</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Study Stream</label>
+                        <select class="form-select" id="stream">
+                            <option value="">All Streams</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Science">Science</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Arts">Arts & Humanities</option>
+                            <option value="All">Any Stream</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Exam Score</label>
+                        <input type="number" class="form-control" id="examScore" placeholder="e.g., 85" min="0" max="100">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Geographic Focus</label>
+                        <select class="form-select" id="location">
+                            <option value="">All Locations</option>
+                            <option value="India">India Only</option>
+                            <option value="International">🌍 International Only</option>
+                            <option value="Both">India + International</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Scholarship Type</label>
+                        <select class="form-select" id="scholarshipType">
+                            <option value="">All Types</option>
+                            <option value="Merit">Merit-Based</option>
+                            <option value="Need">Need-Based</option>
+                            <option value="Competitive">Competitive Exam</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-filter btn-primary-custom" onclick="applyFilters()">
+                        <i class="fas fa-search"></i> Apply Filters
+                    </button>
+                    <button class="btn btn-filter btn-reset" onclick="resetFilters()">
+                        <i class="fas fa-redo"></i> Reset All
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="results-header">
+                    <div class="results-count">
+                        Found <span id="resultsCount" style="color: var(--primary); font-weight: 800;">0</span> scholarships
+                    </div>
+                    <div>
+                        <select class="form-select" id="sortBy" onchange="sortResults()" style="width: auto; min-width: 220px;">
+                            <option value="match">Sort by Best Match %</option>
+                            <option value="deadline">Sort by Deadline</option>
+                            <option value="international">International First</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="resultsContainer">
+                    <div class="loading">
+                        <i class="fas fa-filter"></i>
+                        <h4>Apply Filters to See Results</h4>
+                        <p>Select your preferences from the sidebar to discover scholarships</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-globe"></i> Mergemaniacs</h5>
+                    <p>Your trusted global scholarship discovery platform.</p>
+                    <p class="mt-3">
+                        <strong><i class="fas fa-envelope"></i> mergemaniacs396@gmail.com</strong><br>
+                        <strong><i class="fas fa-phone"></i> +91 9675715931</strong>
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="find-scholarships.html">Find Scholarships</a></li>
+                        <li><a href="my-wishlist.html">My Wishlist</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Our Team</h5>
+                    <ul class="footer-links">
+                        <li>Mayun Bhrasadia - Web Developer</li>
+                        <li>Varnit Bisht - Team Leader & PM</li>
+                        <li>Vansh Agarwal - Web Developer</li>
+                        <li>Yuvraj Kukreja - Website Designer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mergemaniacs | Thapar Institute</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const scholarshipsDB = [
+            { id: 1, name: "Fulbright Scholarship", description: "USA fully funded graduate studies", type: "Merit", source: "International", award: { currency: "USD", min: 50000, max: 150000 }, deadline: "2025-09-30", country: "USA", eligibility: { eduLevels: ["PG", "PhD"], streams: ["All"], minScore: 60, location: "International" }, docs: ["Transcripts", "Passport"], provider: "USIEF" },
+            { id: 2, name: "Chevening Scholarship", description: "UK Government funded Master's", type: "Merit", source: "International", award: { currency: "GBP", min: 15000, max: 50000 }, deadline: "2025-11-06", country: "UK", eligibility: { eduLevels: ["PG"], streams: ["All"], minScore: 65, location: "International" }, docs: ["Degree", "IELTS"], provider: "UK Government" },
+            { id: 3, name: "KVPY Scholarship", description: "Government of India science scholarship", type: "Merit", source: "Government", award: { currency: "INR", min: 7000, max: 28000 }, deadline: "2025-08-31", country: "India", eligibility: { eduLevels: ["School", "UG"], streams: ["Science", "Engineering"], minScore: 75, location: "India" }, docs: ["Class 12 Cert", "Aadhaar"], provider: "IISc" },
+            { id: 4, name: "INSPIRE Scholarship", description: "Science scholarship for UG", type: "Merit", source: "Government", award: { currency: "INR", min: 80000, max: 80000 }, deadline: "2025-07-20", country: "India", eligibility: { eduLevels: ["UG"], streams: ["Science", "Engineering"], minScore: 60, location: "India" }, docs: ["Class 12 Cert", "Admission"], provider: "DST" },
+            { id: 5, name: "PM YASASVI Scheme", description: "Top Class Education for OBC/SC/ST", type: "Category", source: "Government", award: { currency: "INR", min: 75000, max: 125000 }, deadline: "2025-08-15", country: "India", eligibility: { eduLevels: ["School", "UG", "PG"], streams: ["All"], minScore: 50, location: "India" }, docs: ["Caste Cert", "Income Cert"], provider: "Ministry" },
+            { id: 6, name: "MEXT Scholarship", description: "Japan fully funded scholarships", type: "Merit", source: "International", award: { currency: "JPY", min: 144000, max: 300000 }, deadline: "2025-05-15", country: "Japan", eligibility: { eduLevels: ["UG", "PG", "PhD"], streams: ["All"], minScore: 60, location: "International" }, docs: ["Transcripts", "Health Cert"], provider: "MEXT" },
+            { id: 7, name: "DAAD Scholarships", description: "German Academic Exchange Service", type: "Merit", source: "International", award: { currency: "EUR", min: 861, max: 1200 }, deadline: "2025-09-30", country: "Germany", eligibility: { eduLevels: ["PG", "PhD"], streams: ["All"], minScore: 65, location: "International" }, docs: ["Degree", "Language Cert"], provider: "DAAD" },
+            { id: 8, name: "Commonwealth Scholarship", description: "UK, Canada, Australia funding", type: "Merit", source: "International", award: { currency: "GBP", min: 40000, max: 100000 }, deadline: "2025-12-15", country: "Multiple", eligibility: { eduLevels: ["PG", "PhD"], streams: ["All"], minScore: 70, location: "International" }, docs: ["References", "Proposal"], provider: "Commonwealth" },
+            { id: 9, name: "Thapar Merit Scholarship", description: "Merit scholarship at Thapar", type: "Merit", source: "College", award: { currency: "INR", min: 50000, max: 200000 }, deadline: "2025-06-30", country: "India", eligibility: { eduLevels: ["UG"], streams: ["Engineering"], minScore: 85, location: "India" }, docs: ["JEE Score", "12th Marks"], provider: "Thapar" },
+            { id: 10, name: "IIT Delhi Fellowship", description: "Research fellowship at IIT", type: "Merit", source: "College", award: { currency: "INR", min: 60000, max: 150000 }, deadline: "2025-10-31", country: "India", eligibility: { eduLevels: ["PhD"], streams: ["Engineering", "Science"], minScore: 80, location: "India" }, docs: ["PhD Degree", "Research Papers"], provider: "IIT Delhi" },
+            { id: 11, name: "K.C. Mahindra Scholarship", description: "Postgraduate studies abroad", type: "Merit", source: "Private", award: { currency: "INR", min: 600000, max: 600000 }, deadline: "2025-07-15", country: "International", eligibility: { eduLevels: ["PG"], streams: ["All"], minScore: 70, location: "Both" }, docs: ["Bachelor Cert", "Admission"], provider: "Mahindra" },
+            { id: 12, name: "North South Foundation", description: "Merit scholarships for girls", type: "Merit", source: "Private", award: { currency: "INR", min: 30000, max: 100000 }, deadline: "2025-05-15", country: "India", eligibility: { eduLevels: ["UG"], streams: ["All"], minScore: 75, location: "India" }, docs: ["Academic Records", "Income Cert"], provider: "NSF" }
+        ];
+
+        function applyFilters() {
+            const filters = {
+                educationLevel: document.getElementById('educationLevel').value,
+                stream: document.getElementById('stream').value,
+                examScore: document.getElementById('examScore').value,
+                location: document.getElementById('location').value,
+                scholarshipType: document.getElementById('scholarshipType').value
+            };
+
+            let results = scholarshipsDB.filter(s => {
+                if (filters.educationLevel && !s.eligibility.eduLevels.includes("All") && 
+                    !s.eligibility.eduLevels.includes(filters.educationLevel)) return false;
+                if (filters.stream && !s.eligibility.streams.includes("All") && 
+                    !s.eligibility.streams.includes(filters.stream)) return false;
+                if (filters.location && s.eligibility.location !== filters.location && 
+                    s.eligibility.location !== "Both") return false;
+                if (filters.scholarshipType && s.type !== filters.scholarshipType) return false;
+                return true;
+            });
+
+            displayResults(results);
+        }
+
+        function displayResults(scholarships) {
+            const container = document.getElementById('resultsContainer');
+            document.getElementById('resultsCount').textContent = scholarships.length;
+
+            if (scholarships.length === 0) {
+                container.innerHTML = `<div class="loading"><i class="fas fa-search"></i><h4>No Scholarships Found</h4></div>`;
+                return;
+            }
+
+            container.innerHTML = scholarships.map(s => {
+                const match = Math.random() * 40 + 60;
+                const matchColor = match >= 70 ? 'match-high' : 'match-medium';
+                const intlBadge = s.source === 'International' ? '<span class="international-tag">International</span>' : '';
+                const sourceClass = `badge-${s.source.toLowerCase()}`;
+
+                return `<div class="scholarship-card" style="position: relative;">
+                    ${intlBadge}
+                    <h3 class="scholarship-title">${s.name}</h3>
+                    <div style="margin-bottom: 15px;">
+                        <span class="badge-custom ${sourceClass}">${s.source}</span>
+                        <span class="badge-custom">${s.type}</span>
+                    </div>
+                    <div class="match-section">
+                        <div style="font-weight: 700; margin-bottom: 8px;">✨ Your Match: ${Math.round(match)}%</div>
+                        <div class="match-bar">
+                            <div class="match-fill ${matchColor}" style="width: ${match}%">${Math.round(match)}%</div>
+                        </div>
+                    </div>
+                    <p>${s.description}</p>
+                    <div class="scholarship-details">
+                        <div class="detail-item">
+                            <i class="fas fa-money-bill"></i>
+                            <strong>Award:</strong> ${s.award.currency} ${s.award.min}
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar"></i>
+                            <strong>Deadline:</strong> ${new Date(s.deadline).toLocaleDateString('en-IN')}
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-university"></i>
+                            <strong>Provider:</strong> ${s.provider}
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-action btn-view"><i class="fas fa-info-circle"></i> Details</button>
+                        <button class="btn-action btn-wishlist"><i class="fas fa-heart"></i> Wishlist</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('select, input').forEach(el => el.value = '');
+            document.getElementById('resultsContainer').innerHTML = `<div class="loading"><i class="fas fa-filter"></i><h4>Apply Filters</h4></div>`;
+            document.getElementById('resultsCount').textContent = '0';
+        }
+
+        function sortResults() {}
+    </script>
+</body>
+</html>

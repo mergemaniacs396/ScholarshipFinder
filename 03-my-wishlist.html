@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Mergemaniacs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f5f1ff 100%);
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+            padding: 1.2rem 0;
+        }
+        .navbar-brand { font-size: 1.8rem; font-weight: 800; color: white !important; }
+        .nav-link { color: rgba(255, 255, 255, 0.9) !important; font-weight: 600; margin: 0 15px; }
+        .nav-link.active { border-bottom: 3px solid white; }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 70px 0 50px;
+            margin-bottom: 40px;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; }
+        .wishlist-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+            border-radius: 20px;
+        }
+        .empty-state i { font-size: 5rem; color: var(--text-light); margin-bottom: 20px; }
+        .btn-remove {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #2d1b4e 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        .footer h5 { font-size: 1.3rem; font-weight: 700; margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-globe"></i> Mergemaniacs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="find-scholarships.html">Find Scholarships</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="my-wishlist.html">My Wishlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-heart"></i> My Scholarship Wishlist</h1>
+            <p>Track your saved opportunities</p>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 40px 0;">
+        <div id="wishlistContainer">
+            <div class="empty-state">
+                <i class="fas fa-bookmark"></i>
+                <h3>No Saved Scholarships Yet</h3>
+                <p>Start adding scholarships to track your opportunities</p>
+                <a href="find-scholarships.html" class="btn btn-primary" style="margin-top: 20px;">Find Scholarships</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-globe"></i> Mergemaniacs</h5>
+                    <p>Your trusted global scholarship platform.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="find-scholarships.html">Find Scholarships</a></li>
+                        <li><a href="my-wishlist.html">My Wishlist</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Our Team</h5>
+                    <ul class="footer-links">
+                        <li>Mayun Bhrasadia - Web Developer</li>
+                        <li>Varnit Bisht - Team Leader & PM</li>
+                        <li>Vansh Agarwal - Web Developer</li>
+                        <li>Yuvraj Kukreja - Website Designer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
